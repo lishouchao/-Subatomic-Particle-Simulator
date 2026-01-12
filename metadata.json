@@ -1,0 +1,5 @@
+{
+  "name": "Subatomic Particle Simulator",
+  "description": "An interactive 2D simulation of protons, neutrons, and electrons, featuring real-time atomic identification and AI-powered physics insights.",
+  "requestFramePermissions": []
+}
