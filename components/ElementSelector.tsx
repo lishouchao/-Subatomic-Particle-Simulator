@@ -1,24 +1,27 @@
 
 import React from 'react';
 import { ELEMENTS, ExtendedElementData } from '../constants';
+import { translations, Language } from '../i18n';
 
 interface ElementSelectorProps {
   onSelect: (element: ExtendedElementData) => void;
   currentNumber: number;
+  lang: Language;
 }
 
-export const ElementSelector: React.FC<ElementSelectorProps> = ({ onSelect, currentNumber }) => {
+export const ElementSelector: React.FC<ElementSelectorProps> = ({ onSelect, currentNumber, lang }) => {
   const elementList = Object.values(ELEMENTS).filter(e => e.number > 0);
+  const t = translations[lang];
 
   return (
     <div className="fixed left-8 top-44 bottom-32 w-64 z-20 flex flex-col gap-4">
       <div className="bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-2xl flex flex-col h-full shadow-2xl overflow-hidden">
         <div className="p-4 border-b border-slate-800 flex justify-between items-center">
           <h3 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            Element Templates
+            {t.templates}
           </h3>
           <span className="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-500 font-mono">
-            {elementList.length} Known
+            {elementList.length} {t.known}
           </span>
         </div>
         
@@ -41,7 +44,7 @@ export const ElementSelector: React.FC<ElementSelectorProps> = ({ onSelect, curr
               </div>
               <div className="flex flex-col items-start overflow-hidden">
                 <span className="text-xs font-semibold text-slate-200 truncate w-full text-left">
-                  {el.name}
+                  {lang === 'zh' ? el.nameZh : el.nameEn}
                 </span>
                 <span className="text-[10px] font-mono text-slate-500">
                   Z = {el.number}
@@ -53,7 +56,7 @@ export const ElementSelector: React.FC<ElementSelectorProps> = ({ onSelect, curr
         
         <div className="p-3 bg-slate-950/40 border-t border-slate-800">
           <p className="text-[9px] text-slate-500 leading-tight italic">
-            Select an element to instantly reconfigure the subatomic structure.
+            {t.templateHint}
           </p>
         </div>
       </div>

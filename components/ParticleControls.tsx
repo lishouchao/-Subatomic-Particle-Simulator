@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ParticleType } from '../types';
+import { translations, Language } from '../i18n';
 
 interface ControlButtonProps {
   label: string;
@@ -40,13 +41,15 @@ interface ParticleControlsProps {
   onAdd: (type: ParticleType) => void;
   onRemove: (type: ParticleType) => void;
   onReset: () => void;
+  lang: Language;
 }
 
-export const ParticleControls: React.FC<ParticleControlsProps> = ({ protons, neutrons, electrons, onAdd, onRemove, onReset }) => {
+export const ParticleControls: React.FC<ParticleControlsProps> = ({ protons, neutrons, electrons, onAdd, onRemove, onReset, lang }) => {
+  const t = translations[lang];
   return (
     <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex gap-4 items-end z-20">
       <ControlButton 
-        label="Protons" 
+        label={t.protons} 
         type={ParticleType.PROTON} 
         count={protons} 
         onAdd={onAdd} 
@@ -54,7 +57,7 @@ export const ParticleControls: React.FC<ParticleControlsProps> = ({ protons, neu
         colorClass="text-red-400"
       />
       <ControlButton 
-        label="Neutrons" 
+        label={t.neutrons} 
         type={ParticleType.NEUTRON} 
         count={neutrons} 
         onAdd={onAdd} 
@@ -62,7 +65,7 @@ export const ParticleControls: React.FC<ParticleControlsProps> = ({ protons, neu
         colorClass="text-slate-400"
       />
       <ControlButton 
-        label="Electrons" 
+        label={t.electrons} 
         type={ParticleType.ELECTRON} 
         count={electrons} 
         onAdd={onAdd} 
@@ -71,9 +74,9 @@ export const ParticleControls: React.FC<ParticleControlsProps> = ({ protons, neu
       />
       <button 
         onClick={onReset}
-        className="bg-red-900/20 hover:bg-red-900/40 text-red-400 border border-red-900/50 p-4 rounded-2xl transition-all font-bold uppercase text-xs tracking-widest h-[150px] w-16 flex items-center justify-center [writing-mode:vertical-lr] rotate-180"
+        className="bg-red-900/20 hover:bg-red-900/40 text-red-400 border border-red-900/50 p-4 rounded-2xl transition-all font-bold uppercase text-[10px] tracking-widest h-[150px] w-16 flex items-center justify-center [writing-mode:vertical-lr] rotate-180"
       >
-        Reset Atom
+        {t.reset}
       </button>
     </div>
   );
